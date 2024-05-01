@@ -1,0 +1,78 @@
+{
+  "annotations": {
+    "changelogDate": "20240421044201"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "createAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "billType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "billId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "billMonth",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "billAmount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "roomId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "billCost",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "customerID",
+      "fieldType": "String"
+    }
+  ],
+  "name": "BillTable",
+  "relationships": [
+    {
+      "otherEntityField": "roomId",
+      "otherEntityName": "roomTable",
+      "otherEntityRelationshipName": "billTable",
+      "relationshipName": "roomTable",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "citizenID",
+      "otherEntityName": "applicationUser",
+      "otherEntityRelationshipName": "billTable",
+      "relationshipName": "applicationTable",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

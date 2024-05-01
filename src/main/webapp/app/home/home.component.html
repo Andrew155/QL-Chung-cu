@@ -1,0 +1,36 @@
+<div>
+<!--  <div class="homepage-content">-->
+<!--    <span class="hipster "></span>-->
+<!--  </div>-->
+  <div>
+    <img src="https://timecity.vn/wp-content/uploads/2023/03/khu-do-thi-times-city-1-1.jpg"
+         alt="Times City" style="width: 1800px; height: 750px;" />
+  </div>
+
+
+  <div class="col-md-9">
+    <h1>Welcome, Vinhomes Times City management system! </h1>
+
+    <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
+
+    <div>
+      @if (account() !== null){
+        <div class="alert alert-success">
+          @if (account()) {
+            <span id="home-logged-message" jhiTranslate="home.logged.message" [translateValues]="{ username: account()!.login }"
+              >You are logged in as user &quot;{{ account()!.login }}&quot;.</span>
+          }
+        </div>
+      }@else{
+
+
+        <div class="alert alert-warning">
+          <span jhiTranslate="global.messages.info.register.noaccount">You don&apos;t have an account yet?</span>&nbsp;
+          <a class="alert-link" routerLink="/account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+        </div>
+      }
+    </div>
+
+
+  </div>
+</div>

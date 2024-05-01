@@ -1,0 +1,171 @@
+<div>
+  <h2 id="page-heading" data-cy="DonationTableHeading">
+    <span jhiTranslate="qLchungcuApp.donationTable.home.title">Donation Tables</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.donationTable.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-donation-table"
+        [routerLink]="['/donation-table/new']"
+      >
+        <fa-icon  icon="plus" *jhiHasAnyAuthority="'ROLE_ADMIN'"></fa-icon>
+        <span *jhiHasAnyAuthority="'ROLE_ADMIN'" jhiTranslate="qLchungcuApp.donationTable.home.createLabel">Create a new Donation Table</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (donationTables?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="qLchungcuApp.donationTable.home.notFound">No Donation Tables found</span>
+    </div>
+  }
+
+  @if (donationTables && donationTables.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.createAt">Create At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updateAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.updateAt">Update At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="donationId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.donationId">Donation Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="donationType">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.donationType">Donation Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="donationDesc">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.donationDesc">Donation Desc</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="donationMonth">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.donationMonth">Donation Month</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="donationCost">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.donationCost">Donation Cost</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.roomId">Room Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="roomTable.roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.donationTable.roomTable">Room</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (donationTable of donationTables; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/donation-table', donationTable.id, 'view']">{{ donationTable.id }}</a>
+              </td>
+              <td>{{ donationTable.createAt | formatMediumDatetime }}</td>
+              <td>{{ donationTable.updateAt | formatMediumDatetime }}</td>
+              <td>{{ donationTable.deletedAt | formatMediumDatetime }}</td>
+              <td>{{ donationTable.donationId }}</td>
+              <td>{{ donationTable.donationType }}</td>
+              <td>{{ donationTable.donationDesc }}</td>
+              <td>{{ donationTable.donationMonth }}</td>
+              <td>{{ donationTable.donationCost }}</td>
+              <td>{{ donationTable.roomId }}</td>
+              <td>{{ donationTable.status }}</td>
+              <td>
+                @if (donationTable.roomTable) {
+                  <div>
+                    <a [routerLink]="['/room-table', donationTable.roomTable.id, 'view']">{{ donationTable.roomTable.roomId }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/donation-table', donationTable.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="['/donation-table', donationTable.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(donationTable)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,34 @@
+{
+  "qLchungcuApp": {
+    "feeTable": {
+      "home": {
+        "title": "Fee Tables",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fee Table",
+        "createOrEditLabel": "Create or edit a Fee Table",
+        "notFound": "No Fee Tables found"
+      },
+      "created": "A new Fee Table is created with identifier {{ param }}",
+      "updated": "A Fee Table is updated with identifier {{ param }}",
+      "deleted": "A Fee Table is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fee Table {{ id }}?"
+      },
+      "detail": {
+        "title": "Fee Table"
+      },
+      "id": "ID",
+      "createAt": "Create At",
+      "updateAt": "Update At",
+      "deletedAt": "Deleted At",
+      "feeType": "Fee Type",
+      "feeDesc": "Fee Desc",
+      "feeMonth": "Fee Month",
+      "feeCost": "Fee Cost",
+      "date": "Date",
+      "status": "Status",
+      "feeId": "Fee Id",
+      "roomTable": "Room Table"
+    }
+  }
+}

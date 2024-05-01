@@ -1,0 +1,63 @@
+{
+  "annotations": {
+    "changelogDate": "20240421044200"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "createAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "feeType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "feeDesc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "feeMonth",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "feeCost",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "feeId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "FeeTable",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "roomId",
+      "otherEntityName": "roomTable",
+      "otherEntityRelationshipName": "feeTable",
+      "relationshipName": "roomTable",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,31 @@
+{
+  "qLchungcuApp": {
+    "notificationTable": {
+      "home": {
+        "title": "Notification Tables",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Notification Table",
+        "createOrEditLabel": "Create or edit a Notification Table",
+        "notFound": "No Notification Tables found"
+      },
+      "created": "A new Notification Table is created with identifier {{ param }}",
+      "updated": "A Notification Table is updated with identifier {{ param }}",
+      "deleted": "A Notification Table is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Notification Table {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification Table"
+      },
+      "id": "Id",
+      "createAt": "Create At",
+      "updateAt": "Update At",
+      "deletedAt": "Deleted At",
+      "title": "Title",
+      "content": "Content",
+      "userID": "User ID",
+      "requestTable": "Request Table",
+      "applicationTable": "Application Table"
+    }
+  }
+}

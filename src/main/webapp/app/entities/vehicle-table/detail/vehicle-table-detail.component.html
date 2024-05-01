@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (vehicleTable) {
+      <div>
+        <h2 data-cy="vehicleTableDetailsHeading"><span jhiTranslate="qLchungcuApp.vehicleTable.detail.title">Vehicle Table</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ vehicleTable.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.createAt">Create At</span></dt>
+          <dd>
+            <span>{{ vehicleTable.createAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.updateAt">Update At</span></dt>
+          <dd>
+            <span>{{ vehicleTable.updateAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ vehicleTable.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.vehicleName">Vehicle Name</span></dt>
+          <dd>
+            <span>{{ vehicleTable.vehicleName }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.vehicleType">Vehicle Type</span></dt>
+          <dd>
+            <span>{{ vehicleTable.vehicleType }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.vehicleId">Vehicle Id</span></dt>
+          <dd>
+            <span>{{ vehicleTable.vehicleId }}</span>
+          </dd>
+<!--          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.roomId">Room Id</span></dt>-->
+<!--          <dd>-->
+<!--            <span>{{ vehicleTable.roomId }}</span>-->
+<!--          </dd>-->
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.ownerId">Owner Id</span></dt>
+          <dd>
+            <span>{{ vehicleTable.ownerId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.vehicleFee">Vehicle Fee</span></dt>
+          <dd>
+            <span>{{ vehicleTable.vehicleFee }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.vehicleTable.roomTable">Room Table</span></dt>
+          <dd>
+            @if (vehicleTable.roomTable) {
+              <div>
+                <a [routerLink]="['/room-table', vehicleTable.roomTable.id, 'view']">{{ vehicleTable.roomTable.roomId }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/vehicle-table', vehicleTable.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

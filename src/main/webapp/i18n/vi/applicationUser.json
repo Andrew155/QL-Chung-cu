@@ -1,0 +1,38 @@
+{
+  "qLchungcuApp": {
+    "applicationUser": {
+      "home": {
+        "title": "Quản lý người dùng",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một người dùng",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật người dùng",
+        "notFound": "Không tìm thấy người dùng"
+      },
+      "created": "Một người dùng mới được tạo với định danh {{ param }}",
+      "updated": "Một người dùng User cập nhật với định danh {{ param }}",
+      "deleted": "Một người dùng User đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa người dùng {{ id }}?"
+      },
+      "detail": {
+        "title": "Application User"
+      },
+      "id": "ID",
+      "createAt": "Ngày tạo",
+      "updateAt": "Ngày chỉnh sửa",
+      "deletedAt": "Ngày xoá",
+      "familyId": "Mã hộ",
+      "citizenID": "Mã dân cư",
+      "name": "Họ tên",
+      "dob": "Ngày sinh",
+      "contact": "Địa chỉ",
+      "gender": "Giới tính",
+      "relation": "Quan hệ với chủ hộ",
+      "status": "Tình trạng",
+      "roomId": "Mã phòng",
+      "internalUser": "",
+      "billTable": "Bill Table",
+      "notificationTable": "Notification Table"
+    }
+  }
+}

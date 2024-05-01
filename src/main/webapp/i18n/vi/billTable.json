@@ -1,0 +1,37 @@
+{
+  "qLchungcuApp": {
+    "billTable": {
+      "home": {
+        "title": "Quản lý bill",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Bill",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Bill",
+        "notFound": "No Bill found"
+      },
+      "created": "Một Bill mới được tạo với định danh {{ param }}",
+      "updated": "Một Bill cập nhật với định danh {{ param }}",
+      "deleted": "Một Bill đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Bill {{ id }}?"
+      },
+      "detail": {
+        "title": "Quản lý Bill"
+      },
+      "id": "ID",
+      "createAt": "Ngày tạo",
+      "updateAt": "Ngày chỉnh sửa",
+      "deletedAt": "Ngày xoá",
+      "billType": "Loại bill",
+      "billId": "Mã bill",
+      "billMonth": "Tháng",
+      "billAmount": "Số bill",
+      "roomId": "Mã phòng",
+      "date": "Ngày đóng",
+      "status": "Tình trạng",
+      "billCost": "Thành tiền",
+      "customerID": "Customer ID",
+      "roomTable": "Mã phòng",
+      "applicationTable": "Application Table"
+    }
+  }
+}

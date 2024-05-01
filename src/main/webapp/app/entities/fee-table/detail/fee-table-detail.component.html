@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (feeTable) {
+      <div>
+        <h2 data-cy="feeTableDetailsHeading"><span jhiTranslate="qLchungcuApp.feeTable.detail.title">Fee Table</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ feeTable.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.createAt">Create At</span></dt>
+          <dd>
+            <span>{{ feeTable.createAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.updateAt">Update At</span></dt>
+          <dd>
+            <span>{{ feeTable.updateAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ feeTable.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.feeType">Fee Type</span></dt>
+          <dd>
+            <span>{{ feeTable.feeType }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.feeDesc">Fee Desc</span></dt>
+          <dd>
+            <span>{{ feeTable.feeDesc }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.feeMonth">Fee Month</span></dt>
+          <dd>
+            <span>{{ feeTable.feeMonth }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.feeCost">Fee Cost</span></dt>
+          <dd>
+            <span>{{ feeTable.feeCost }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.date">Date</span></dt>
+          <dd>
+            <span>{{ feeTable.date | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.status">Status</span></dt>
+          <dd>
+            <span>{{ feeTable.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.feeId">Fee Id</span></dt>
+          <dd>
+            <span>{{ feeTable.feeId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.feeTable.roomTable">Room Table</span></dt>
+          <dd>
+            @if (feeTable.roomTable) {
+              <div>
+                <a [routerLink]="['/room-table', feeTable.roomTable.id, 'view']">{{ feeTable.roomTable.roomId }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/fee-table', feeTable.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

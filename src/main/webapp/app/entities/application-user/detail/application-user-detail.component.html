@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (applicationUser) {
+      <div>
+        <h2 data-cy="applicationUserDetailsHeading">
+          <span jhiTranslate="qLchungcuApp.applicationUser.detail.title">Application User</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ applicationUser.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.createAt">Create At</span></dt>
+          <dd>
+            <span>{{ applicationUser.createAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.updateAt">Update At</span></dt>
+          <dd>
+            <span>{{ applicationUser.updateAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ applicationUser.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.familyId">Family Id</span></dt>
+          <dd>
+            <span>{{ applicationUser.familyId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.citizenID">Citizen ID</span></dt>
+          <dd>
+            <span>{{ applicationUser.citizenID }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.name">Name</span></dt>
+          <dd>
+            <span>{{ applicationUser.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.dob">Dob</span></dt>
+          <dd>
+            <span>{{ applicationUser.dob }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.contact">Contact</span></dt>
+          <dd>
+            <span>{{ applicationUser.contact }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.gender">Gender</span></dt>
+          <dd>
+            <span>{{ applicationUser.gender }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.relation">Relation</span></dt>
+          <dd>
+            <span>{{ applicationUser.relation }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.status">Status</span></dt>
+          <dd>
+            <span>{{ applicationUser.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.roomId">Room Id</span></dt>
+          <dd>
+            <span>{{ applicationUser.roomId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.applicationUser.internalUser">Internal User</span></dt>
+          <dd>
+            <span>{{ applicationUser.internalUser?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/application-user', applicationUser.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

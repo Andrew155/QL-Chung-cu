@@ -1,0 +1,63 @@
+{
+  "annotations": {
+    "changelogDate": "20240421044205"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "createAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "donationId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "donationType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "donationDesc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "donationMonth",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "donationCost",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "roomId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DonationTable",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "roomId",
+      "otherEntityName": "roomTable",
+      "otherEntityRelationshipName": "donationTable",
+      "relationshipName": "roomTable",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

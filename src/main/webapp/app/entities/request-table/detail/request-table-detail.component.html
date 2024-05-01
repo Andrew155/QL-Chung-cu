@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (requestTable) {
+      <div>
+        <h2 data-cy="requestTableDetailsHeading"><span jhiTranslate="qLchungcuApp.requestTable.detail.title">Request Table</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.id">Id</span></dt>
+          <dd>
+            <span>{{ requestTable.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.createAt">Create At</span></dt>
+          <dd>
+            <span>{{ requestTable.createAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.updateAt">Update At</span></dt>
+          <dd>
+            <span>{{ requestTable.updateAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ requestTable.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.status">Status</span></dt>
+          <dd>
+            <span>{{ requestTable.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.userId">User Id</span></dt>
+          <dd>
+            <span>{{ requestTable.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.title">Title</span></dt>
+          <dd>
+            <span>{{ requestTable.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.message">Message</span></dt>
+          <dd>
+            <span>{{ requestTable.message }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.reply">Reply</span></dt>
+          <dd>
+            <span>{{ requestTable.reply }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.note">Note</span></dt>
+          <dd>
+            <span>{{ requestTable.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.requestTable.notificationTable">Notification Table</span></dt>
+          <dd>
+            @if (requestTable.notificationTable) {
+              <div>
+                <a [routerLink]="['/notification-table', requestTable.notificationTable.id, 'view']">{{
+                  requestTable.notificationTable.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/request-table', requestTable.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

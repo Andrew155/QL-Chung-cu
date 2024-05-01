@@ -1,0 +1,202 @@
+<div>
+  <h2 id="page-heading" data-cy="BillTableHeading">
+    <span jhiTranslate="qLchungcuApp.billTable.home.title">Bill Tables</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.billTable.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-bill-table"
+        [routerLink]="['/bill-table/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.billTable.home.createLabel">Create a new Bill Table</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (billTables?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="qLchungcuApp.billTable.home.notFound">No Bill Tables found</span>
+    </div>
+  }
+
+  @if (billTables && billTables.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.createAt">Create At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updateAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.updateAt">Update At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="billType">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.billType">Bill Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="billId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.billId">Bill Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="billMonth">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.billMonth">Bill Month</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="billAmount">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.billAmount">Bill Amount</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.roomId">Room Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="date">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.date">Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="billCost">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.billCost">Bill Cost</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="customerID">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.customerID">Customer ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="roomTable.roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.roomTable">Room Table</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="applicationTable.citizenID">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.billTable.applicationTable">Application Table</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (billTable of billTables; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/bill-table', billTable.id, 'view']">{{ billTable.id }}</a>
+              </td>
+              <td>{{ billTable.createAt | formatMediumDatetime }}</td>
+              <td>{{ billTable.updateAt | formatMediumDatetime }}</td>
+              <td>{{ billTable.deletedAt | formatMediumDatetime }}</td>
+              <td>{{ billTable.billType }}</td>
+              <td>{{ billTable.billId }}</td>
+              <td>{{ billTable.billMonth }}</td>
+              <td>{{ billTable.billAmount }}</td>
+              <td>{{ billTable.roomId }}</td>
+              <td>{{ billTable.date | formatMediumDatetime }}</td>
+              <td>{{ billTable.status }}</td>
+              <td>{{ billTable.billCost }}</td>
+              <td>{{ billTable.customerID }}</td>
+              <td>
+                @if (billTable.roomTable) {
+                  <div>
+                    <a [routerLink]="['/room-table', billTable.roomTable.id, 'view']">{{ billTable.roomTable.roomId }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (billTable.applicationTable) {
+                  <div>
+                    <a [routerLink]="['/application-user', billTable.applicationTable.id, 'view']">{{
+                      billTable.applicationTable.citizenID
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/bill-table', billTable.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/bill-table', billTable.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(billTable)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

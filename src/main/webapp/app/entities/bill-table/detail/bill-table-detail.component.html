@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (billTable) {
+      <div>
+        <h2 data-cy="billTableDetailsHeading"><span jhiTranslate="qLchungcuApp.billTable.detail.title">Bill Table</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ billTable.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.createAt">Create At</span></dt>
+          <dd>
+            <span>{{ billTable.createAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.updateAt">Update At</span></dt>
+          <dd>
+            <span>{{ billTable.updateAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ billTable.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.billType">Bill Type</span></dt>
+          <dd>
+            <span>{{ billTable.billType }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.billId">Bill Id</span></dt>
+          <dd>
+            <span>{{ billTable.billId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.billMonth">Bill Month</span></dt>
+          <dd>
+            <span>{{ billTable.billMonth }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.billAmount">Bill Amount</span></dt>
+          <dd>
+            <span>{{ billTable.billAmount }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.roomId">Room Id</span></dt>
+          <dd>
+            <span>{{ billTable.roomId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.date">Date</span></dt>
+          <dd>
+            <span>{{ billTable.date | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.status">Status</span></dt>
+          <dd>
+            <span>{{ billTable.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.billCost">Bill Cost</span></dt>
+          <dd>
+            <span>{{ billTable.billCost }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.customerID">Customer ID</span></dt>
+          <dd>
+            <span>{{ billTable.customerID }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.roomTable">Room Table</span></dt>
+          <dd>
+            @if (billTable.roomTable) {
+              <div>
+                <a [routerLink]="['/room-table', billTable.roomTable.id, 'view']">{{ billTable.roomTable.roomId }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.billTable.applicationTable">Application Table</span></dt>
+          <dd>
+            @if (billTable.applicationTable) {
+              <div>
+                <a [routerLink]="['/application-user', billTable.applicationTable.id, 'view']">{{
+                  billTable.applicationTable.citizenID
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/bill-table', billTable.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

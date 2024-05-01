@@ -1,0 +1,171 @@
+<div>
+  <h2 id="page-heading" data-cy="FeeTableHeading">
+    <span jhiTranslate="qLchungcuApp.feeTable.home.title">Fee Tables</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.feeTable.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-fee-table"
+        [routerLink]="['/fee-table/new']"
+      >
+        <fa-icon *jhiHasAnyAuthority="'ROLE_ADMIN'" icon="plus"></fa-icon>
+        <span *jhiHasAnyAuthority="'ROLE_ADMIN'" jhiTranslate="qLchungcuApp.feeTable.home.createLabel">Create a new Fee Table</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (feeTables?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="qLchungcuApp.feeTable.home.notFound">No Fee Tables found</span>
+    </div>
+  }
+
+  @if (feeTables && feeTables.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.createAt">Create At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updateAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.updateAt">Update At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="feeType">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.feeType">Fee Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="feeDesc">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.feeDesc">Fee Desc</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="feeMonth">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.feeMonth">Fee Month</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="feeCost">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.feeCost">Fee Cost</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="date">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.date">Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="feeId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.feeId">Fee Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="roomTable.roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.feeTable.roomTable">Room Table</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (feeTable of feeTables; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/fee-table', feeTable.id, 'view']">{{ feeTable.id }}</a>
+              </td>
+              <td>{{ feeTable.createAt | formatMediumDatetime }}</td>
+              <td>{{ feeTable.updateAt | formatMediumDatetime }}</td>
+              <td>{{ feeTable.deletedAt | formatMediumDatetime }}</td>
+              <td>{{ feeTable.feeType }}</td>
+              <td>{{ feeTable.feeDesc }}</td>
+              <td>{{ feeTable.feeMonth }}</td>
+              <td>{{ feeTable.feeCost }}</td>
+              <td>{{ feeTable.date | formatMediumDatetime }}</td>
+              <td>{{ feeTable.status }}</td>
+              <td>{{ feeTable.feeId }}</td>
+              <td>
+                @if (feeTable.roomTable) {
+                  <div>
+                    <a [routerLink]="['/room-table', feeTable.roomTable.id, 'view']">{{ feeTable.roomTable.roomId }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/fee-table', feeTable.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="['/fee-table', feeTable.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(feeTable)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

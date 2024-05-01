@@ -1,0 +1,179 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-donation-table-heading"
+        data-cy="DonationTableCreateUpdateHeading"
+        jhiTranslate="qLchungcuApp.donationTable.home.createOrEditLabel"
+      >
+        Create or edit a Donation Table
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.createAt" for="field_createAt">Create At</label>
+          <div class="d-flex">
+            <input
+              id="field_createAt"
+              data-cy="createAt"
+              type="datetime-local"
+              class="form-control"
+              name="createAt"
+              formControlName="createAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.updateAt" for="field_updateAt">Update At</label>
+          <div class="d-flex">
+            <input
+              id="field_updateAt"
+              data-cy="updateAt"
+              type="datetime-local"
+              class="form-control"
+              name="updateAt"
+              formControlName="updateAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.deletedAt" for="field_deletedAt">Deleted At</label>
+          <div class="d-flex">
+            <input
+              id="field_deletedAt"
+              data-cy="deletedAt"
+              type="datetime-local"
+              class="form-control"
+              name="deletedAt"
+              formControlName="deletedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.donationId" for="field_donationId">Donation Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="donationId"
+            id="field_donationId"
+            data-cy="donationId"
+            formControlName="donationId"
+          />
+          @if (editForm.get('donationId')!.invalid && (editForm.get('donationId')!.dirty || editForm.get('donationId')!.touched)) {
+            <div>
+              @if (editForm.get('donationId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.donationType" for="field_donationType">Donation Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="donationType"
+            id="field_donationType"
+            data-cy="donationType"
+            formControlName="donationType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.donationDesc" for="field_donationDesc">Donation Desc</label>
+          <input
+            type="text"
+            class="form-control"
+            name="donationDesc"
+            id="field_donationDesc"
+            data-cy="donationDesc"
+            formControlName="donationDesc"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.donationMonth" for="field_donationMonth">Donation Month</label>
+          <input
+            type="text"
+            class="form-control"
+            name="donationMonth"
+            id="field_donationMonth"
+            data-cy="donationMonth"
+            formControlName="donationMonth"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.donationCost" for="field_donationCost">Donation Cost</label>
+          <input
+            type="number"
+            class="form-control"
+            name="donationCost"
+            id="field_donationCost"
+            data-cy="donationCost"
+            formControlName="donationCost"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.roomId" for="field_roomId">Room Id</label>
+          <input type="text" class="form-control" name="roomId" id="field_roomId" data-cy="roomId" formControlName="roomId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.donationTable.roomTable" for="field_roomTable">Room Table</label>
+          <select
+            class="form-control"
+            id="field_roomTable"
+            data-cy="roomTable"
+            name="roomTable"
+            formControlName="roomTable"
+            [compareWith]="compareRoomTable"
+          >
+            <option [ngValue]="null"></option>
+            @for (roomTableOption of roomTablesSharedCollection; track $index) {
+              <option [ngValue]="roomTableOption">{{ roomTableOption.roomId }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

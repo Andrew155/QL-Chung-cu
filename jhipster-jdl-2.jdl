@@ -1,0 +1,162 @@
+entity ApplicationUser {
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  familyId String
+  citizenID String required
+  name String
+  dob String
+  contact String
+  gender String
+  relation String
+  status String
+  roomId String
+  
+}
+
+entity CitizenTable {
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  citizenID String required
+  name String
+  dob String
+  contact String
+  gender String
+ // roomId String
+  relation String
+  status String
+}
+
+entity RoomTable{
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  roomId String required
+  area String
+  ownTime String
+  ownerId String
+  ownerName String
+  status String
+  
+}
+entity FeeTable{
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  feeType String
+  feeDesc String
+  feeMonth String
+  feeCost Long
+  //roomId String
+  date Instant
+  status String
+  feeId String required
+}
+
+entity BillTable{
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  billType String
+  billId String required
+  billMonth String
+  billAmount Integer
+  roomId String
+  date Instant
+  status String
+  billCost Long
+  customerID String
+}
+
+entity RequestTable{
+  id Integer required
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  status String
+  userId String 
+  title String
+  message String
+  reply String
+  note String
+}
+
+entity NotificationTable{
+  id Integer required
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  title String
+  content String
+  userID String 
+}
+
+entity VehicleTable{
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  vehicleName String
+  vehicleType String
+  vehicleId String required
+  roomId String
+  ownerId String
+  vehicleFee Long
+  
+}
+
+entity DonationTable{
+  createAt Instant
+  updateAt Instant
+  deletedAt Instant
+  donationId String required
+  donationType String
+  donationDesc String
+  donationMonth String
+  donationCost Long
+  roomId String
+  status String
+}
+
+
+relationship OneToOne {
+  ApplicationUser{internalUser(login)} to @OnDelete("CASCADE") @Id User with builtInEntity
+}
+
+
+relationship OneToMany {
+  RoomTable{feeTable} to FeeTable{roomTable(roomId)}
+}
+relationship OneToMany {
+  RoomTable{vehicleTable} to VehicleTable{roomTable(roomId)}
+}
+relationship OneToOne {
+  RequestTable{notificationTable} to NotificationTable{requestTable}
+}
+relationship OneToMany {
+  RoomTable{billTable} to BillTable{roomTable(roomId)}
+}
+relationship OneToMany {
+  ApplicationUser{billTable} to BillTable{applicationTable(citizenID)}
+}
+
+
+
+
+
+
+relationship OneToMany {
+  RoomTable{donationTable} to DonationTable{roomTable(roomId)}
+}
+relationship OneToMany{
+ ApplicationUser{notificationTable} to NotificationTable{applicationTable}
+}
+
+
+relationship OneToOne{
+ CitizenTable{familyId(roomId)} to RoomTable
+}
+paginate FeeTable, RoomTable, VehicleTable, DonationTable with infinite-scroll
+
+
+service all with serviceImpl

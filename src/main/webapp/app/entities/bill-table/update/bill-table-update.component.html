@@ -1,0 +1,193 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-bill-table-heading" data-cy="BillTableCreateUpdateHeading" jhiTranslate="qLchungcuApp.billTable.home.createOrEditLabel">
+        Create or edit a Bill Table
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.createAt" for="field_createAt">Create At</label>
+          <div class="d-flex">
+            <input
+              id="field_createAt"
+              data-cy="createAt"
+              type="datetime-local"
+              class="form-control"
+              name="createAt"
+              formControlName="createAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.updateAt" for="field_updateAt">Update At</label>
+          <div class="d-flex">
+            <input
+              id="field_updateAt"
+              data-cy="updateAt"
+              type="datetime-local"
+              class="form-control"
+              name="updateAt"
+              formControlName="updateAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.deletedAt" for="field_deletedAt">Deleted At</label>
+          <div class="d-flex">
+            <input
+              id="field_deletedAt"
+              data-cy="deletedAt"
+              type="datetime-local"
+              class="form-control"
+              name="deletedAt"
+              formControlName="deletedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.billType" for="field_billType">Bill Type</label>
+          <input type="text" class="form-control" name="billType" id="field_billType" data-cy="billType" formControlName="billType" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.billId" for="field_billId">Bill Id</label>
+          <input type="text" class="form-control" name="billId" id="field_billId" data-cy="billId" formControlName="billId" />
+          @if (editForm.get('billId')!.invalid && (editForm.get('billId')!.dirty || editForm.get('billId')!.touched)) {
+            <div>
+              @if (editForm.get('billId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.billMonth" for="field_billMonth">Bill Month</label>
+          <input type="text" class="form-control" name="billMonth" id="field_billMonth" data-cy="billMonth" formControlName="billMonth" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.billAmount" for="field_billAmount">Bill Amount</label>
+          <input
+            type="number"
+            class="form-control"
+            name="billAmount"
+            id="field_billAmount"
+            data-cy="billAmount"
+            formControlName="billAmount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.roomId" for="field_roomId">Room Id</label>
+          <input type="text" class="form-control" name="roomId" id="field_roomId" data-cy="roomId" formControlName="roomId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.date" for="field_date">Date</label>
+          <div class="d-flex">
+            <input
+              id="field_date"
+              data-cy="date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.billCost" for="field_billCost">Bill Cost</label>
+          <input type="number" class="form-control" name="billCost" id="field_billCost" data-cy="billCost" formControlName="billCost" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.customerID" for="field_customerID">Customer ID</label>
+          <input
+            type="text"
+            class="form-control"
+            name="customerID"
+            id="field_customerID"
+            data-cy="customerID"
+            formControlName="customerID"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.roomTable" for="field_roomTable">Room Table</label>
+          <select
+            class="form-control"
+            id="field_roomTable"
+            data-cy="roomTable"
+            name="roomTable"
+            formControlName="roomTable"
+            [compareWith]="compareRoomTable"
+          >
+            <option [ngValue]="null"></option>
+            @for (roomTableOption of roomTablesSharedCollection; track $index) {
+              <option [ngValue]="roomTableOption">{{ roomTableOption.roomId }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.billTable.applicationTable" for="field_applicationTable"
+            >Application Table</label
+          >
+          <select
+            class="form-control"
+            id="field_applicationTable"
+            data-cy="applicationTable"
+            name="applicationTable"
+            formControlName="applicationTable"
+            [compareWith]="compareApplicationUser"
+          >
+            <option [ngValue]="null"></option>
+            @for (applicationUserOption of applicationUsersSharedCollection; track $index) {
+              <option [ngValue]="applicationUserOption">{{ applicationUserOption.citizenID }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

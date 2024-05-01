@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (citizenTable) {
+      <div>
+        <h2 data-cy="citizenTableDetailsHeading"><span jhiTranslate="qLchungcuApp.citizenTable.detail.title">Citizen Table</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ citizenTable.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.createAt">Create At</span></dt>
+          <dd>
+            <span>{{ citizenTable.createAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.updateAt">Update At</span></dt>
+          <dd>
+            <span>{{ citizenTable.updateAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ citizenTable.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.citizenID">Citizen ID</span></dt>
+          <dd>
+            <span>{{ citizenTable.citizenID }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.name">Name</span></dt>
+          <dd>
+            <span>{{ citizenTable.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.dob">Dob</span></dt>
+          <dd>
+            <span>{{ citizenTable.dob }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.contact">Contact</span></dt>
+          <dd>
+            <span>{{ citizenTable.contact }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.gender">Gender</span></dt>
+          <dd>
+            <span>{{ citizenTable.gender }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.relation">Relation</span></dt>
+          <dd>
+            <span>{{ citizenTable.relation }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.status">Status</span></dt>
+          <dd>
+            <span>{{ citizenTable.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.citizenTable.familyId">Family Id</span></dt>
+          <dd>
+            @if (citizenTable.familyId) {
+              <div>
+                <a [routerLink]="['/room-table', citizenTable.familyId.id, 'view']">{{ citizenTable.familyId.roomId }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/citizen-table', citizenTable.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

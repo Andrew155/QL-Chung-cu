@@ -1,0 +1,191 @@
+<div>
+  <h2 id="page-heading" data-cy="ApplicationUserHeading">
+    <span jhiTranslate="qLchungcuApp.applicationUser.home.title">Application Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.applicationUser.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-application-user"
+        [routerLink]="['/application-user/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.applicationUser.home.createLabel">Create a new Application User</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (applicationUsers?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="qLchungcuApp.applicationUser.home.notFound">No Application Users found</span>
+    </div>
+  }
+
+  @if (applicationUsers && applicationUsers.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.createAt">Create At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updateAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.updateAt">Update At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="familyId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.familyId">Family Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="citizenID">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.citizenID">Citizen ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dob">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.dob">Dob</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contact">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.contact">Contact</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gender">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="relation">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.relation">Relation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.applicationUser.roomId">Room Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+<!--            <th scope="col" jhiSortBy="internalUser.login">-->
+<!--              <div class="d-flex">-->
+<!--                <span jhiTranslate="qLchungcuApp.applicationUser.internalUser">Internal User</span>-->
+<!--                <fa-icon class="p-1" icon="sort"></fa-icon>-->
+<!--              </div>-->
+<!--            </th>-->
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (applicationUser of applicationUsers; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/application-user', applicationUser.id, 'view']">{{ applicationUser.id }}</a>
+              </td>
+              <td>{{ applicationUser.createAt | formatMediumDatetime }}</td>
+              <td>{{ applicationUser.updateAt | formatMediumDatetime }}</td>
+              <td>{{ applicationUser.deletedAt | formatMediumDatetime }}</td>
+              <td>{{ applicationUser.familyId }}</td>
+              <td>{{ applicationUser.citizenID }}</td>
+              <td>{{ applicationUser.name }}</td>
+              <td>{{ applicationUser.dob }}</td>
+              <td>{{ applicationUser.contact }}</td>
+              <td>{{ applicationUser.gender }}</td>
+              <td>{{ applicationUser.relation }}</td>
+              <td>{{ applicationUser.status }}</td>
+              <td>{{ applicationUser.roomId }}</td>
+              <td>
+                {{ applicationUser.internalUser?.login }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/application-user', applicationUser.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/application-user', applicationUser.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(applicationUser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

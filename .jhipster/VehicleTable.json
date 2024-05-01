@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20240421044204"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "createAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "vehicleName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "vehicleType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "vehicleId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "roomId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ownerId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "vehicleFee",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "VehicleTable",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "roomId",
+      "otherEntityName": "roomTable",
+      "otherEntityRelationshipName": "vehicleTable",
+      "relationshipName": "roomTable",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

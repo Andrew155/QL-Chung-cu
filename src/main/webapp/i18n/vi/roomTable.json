@@ -1,0 +1,37 @@
+{
+  "qLchungcuApp": {
+    "roomTable": {
+      "home": {
+        "title": "Quản lý phòng",
+        "refreshListLabel": "Refresh",
+        "createLabel": "Thêm mới một phòng",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật phòng",
+        "notFound": "Không tìm thấy phòng"
+      },
+      "created": "Một phòng mới được tạo với mã {{ param }}",
+      "updated": "Một phòng cập nhật với mã {{ param }}",
+      "deleted": "Một phòng đã xóa với mã {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa phòng {{ id }}?"
+      },
+      "detail": {
+        "title": "Quản lý phòng"
+      },
+      "id": "ID",
+      "createAt": "Ngày Tạo",
+      "updateAt": "Ngày cập nhật",
+      "deletedAt": "Ngày xoá",
+      "roomId": "Mã phòng",
+      "area": "Khu vực",
+      "ownTime": "Thời gian sở hữu",
+      "ownerId": "Mã chủ hộ",
+      "ownerName": "Họ tên chủ hộ",
+      "status": "Tình trạng",
+      "feeTable": "Phí",
+      "vehicleTable": "Phương tiện",
+      "billTable": "Biên lai",
+      "donationTable": "Quyên góp",
+      "citizenTable": "Thành viên"
+    }
+  }
+}

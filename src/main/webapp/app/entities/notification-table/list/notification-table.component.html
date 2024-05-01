@@ -1,0 +1,149 @@
+<div>
+  <h2 id="page-heading" data-cy="NotificationTableHeading">
+    <span jhiTranslate="qLchungcuApp.notificationTable.home.title">Notification Tables</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.notificationTable.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-notification-table"
+        [routerLink]="['/notification-table/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.notificationTable.home.createLabel">Create a new Notification Table</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (notificationTables?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="qLchungcuApp.notificationTable.home.notFound">No Notification Tables found</span>
+    </div>
+  }
+
+  @if (notificationTables && notificationTables.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.notificationTable.id">Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.notificationTable.createAt">Create At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updateAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.notificationTable.updateAt">Update At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.notificationTable.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="title">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.notificationTable.title">Title</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="content">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.notificationTable.content">Content</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userID">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.notificationTable.userID">User ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="applicationTable.id">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.notificationTable.applicationTable">Application Table</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (notificationTable of notificationTables; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/notification-table', notificationTable.id, 'view']">{{ notificationTable.id }}</a>
+              </td>
+              <td>{{ notificationTable.createAt | formatMediumDatetime }}</td>
+              <td>{{ notificationTable.updateAt | formatMediumDatetime }}</td>
+              <td>{{ notificationTable.deletedAt | formatMediumDatetime }}</td>
+              <td>{{ notificationTable.title }}</td>
+              <td>{{ notificationTable.content }}</td>
+              <td>{{ notificationTable.userID }}</td>
+              <td>
+                @if (notificationTable.applicationTable) {
+                  <div>
+                    <a [routerLink]="['/application-user', notificationTable.applicationTable.id, 'view']">{{
+                      notificationTable.applicationTable.id
+                    }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/notification-table', notificationTable.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/notification-table', notificationTable.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(notificationTable)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

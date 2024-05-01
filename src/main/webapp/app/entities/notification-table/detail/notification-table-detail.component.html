@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (notificationTable) {
+      <div>
+        <h2 data-cy="notificationTableDetailsHeading">
+          <span jhiTranslate="qLchungcuApp.notificationTable.detail.title">Notification Table</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="qLchungcuApp.notificationTable.id">Id</span></dt>
+          <dd>
+            <span>{{ notificationTable.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.notificationTable.createAt">Create At</span></dt>
+          <dd>
+            <span>{{ notificationTable.createAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.notificationTable.updateAt">Update At</span></dt>
+          <dd>
+            <span>{{ notificationTable.updateAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.notificationTable.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ notificationTable.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.notificationTable.title">Title</span></dt>
+          <dd>
+            <span>{{ notificationTable.title }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.notificationTable.content">Content</span></dt>
+          <dd>
+            <span>{{ notificationTable.content }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.notificationTable.userID">User ID</span></dt>
+          <dd>
+            <span>{{ notificationTable.userID }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.notificationTable.applicationTable">Application Table</span></dt>
+          <dd>
+            @if (notificationTable.applicationTable) {
+              <div>
+                <a [routerLink]="['/application-user', notificationTable.applicationTable.id, 'view']">{{
+                  notificationTable.applicationTable.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/notification-table', notificationTable.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

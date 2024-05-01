@@ -1,0 +1,31 @@
+{
+  "qLchungcuApp": {
+    "notificationTable": {
+      "home": {
+        "title": "Notification Tables",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Thêm mới một Notification Table",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Notification Table",
+        "notFound": "No Notification Tables found"
+      },
+      "created": "Một Notification Table mới được tạo với định danh {{ param }}",
+      "updated": "Một Notification Table cập nhật với định danh {{ param }}",
+      "deleted": "Một Notification Table đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Notification Table {{ id }}?"
+      },
+      "detail": {
+        "title": "Notification Table"
+      },
+      "id": "Id",
+      "createAt": "Create At",
+      "updateAt": "Update At",
+      "deletedAt": "Deleted At",
+      "title": "Title",
+      "content": "Content",
+      "userID": "User ID",
+      "requestTable": "Request Table",
+      "applicationTable": "Application Table"
+    }
+  }
+}

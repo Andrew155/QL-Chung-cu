@@ -1,0 +1,144 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-request-table-heading"
+        data-cy="RequestTableCreateUpdateHeading"
+        jhiTranslate="qLchungcuApp.requestTable.home.createOrEditLabel"
+      >
+        Create or edit a Request Table
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.id" for="field_id">Id</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            @if (editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)) {
+              <div>
+                @if (editForm.get('id')?.errors?.required) {
+                  <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+                }
+                <small class="form-text text-danger" [hidden]="!editForm.get('id')?.errors?.number" jhiTranslate="entity.validation.number"
+                  >This field should be a number.</small
+                >
+              </div>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.createAt" for="field_createAt">Create At</label>
+          <div class="d-flex">
+            <input
+              id="field_createAt"
+              data-cy="createAt"
+              type="datetime-local"
+              class="form-control"
+              name="createAt"
+              formControlName="createAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.updateAt" for="field_updateAt">Update At</label>
+          <div class="d-flex">
+            <input
+              id="field_updateAt"
+              data-cy="updateAt"
+              type="datetime-local"
+              class="form-control"
+              name="updateAt"
+              formControlName="updateAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.deletedAt" for="field_deletedAt">Deleted At</label>
+          <div class="d-flex">
+            <input
+              id="field_deletedAt"
+              data-cy="deletedAt"
+              type="datetime-local"
+              class="form-control"
+              name="deletedAt"
+              formControlName="deletedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.userId" for="field_userId">User Id</label>
+          <input type="text" class="form-control" name="userId" id="field_userId" data-cy="userId" formControlName="userId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.message" for="field_message">Message</label>
+          <input type="text" class="form-control" name="message" id="field_message" data-cy="message" formControlName="message" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.reply" for="field_reply">Reply</label>
+          <input type="text" class="form-control" name="reply" id="field_reply" data-cy="reply" formControlName="reply" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.note" for="field_note">Note</label>
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.requestTable.notificationTable" for="field_notificationTable"
+            >Notification Table</label
+          >
+          <select
+            class="form-control"
+            id="field_notificationTable"
+            data-cy="notificationTable"
+            name="notificationTable"
+            formControlName="notificationTable"
+            [compareWith]="compareNotificationTable"
+          >
+            <option [ngValue]="null"></option>
+            @for (notificationTableOption of notificationTablesCollection; track $index) {
+              <option [ngValue]="notificationTableOption">{{ notificationTableOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

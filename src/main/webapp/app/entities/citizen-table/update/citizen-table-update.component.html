@@ -1,0 +1,144 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-citizen-table-heading"
+        data-cy="CitizenTableCreateUpdateHeading"
+        jhiTranslate="qLchungcuApp.citizenTable.home.createOrEditLabel"
+      >
+        Create or edit a Citizen Table
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.createAt" for="field_createAt">Create At</label>
+          <div class="d-flex">
+            <input
+              id="field_createAt"
+              data-cy="createAt"
+              type="datetime-local"
+              class="form-control"
+              name="createAt"
+              formControlName="createAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.updateAt" for="field_updateAt">Update At</label>
+          <div class="d-flex">
+            <input
+              id="field_updateAt"
+              data-cy="updateAt"
+              type="datetime-local"
+              class="form-control"
+              name="updateAt"
+              formControlName="updateAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.deletedAt" for="field_deletedAt">Deleted At</label>
+          <div class="d-flex">
+            <input
+              id="field_deletedAt"
+              data-cy="deletedAt"
+              type="datetime-local"
+              class="form-control"
+              name="deletedAt"
+              formControlName="deletedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.citizenID" for="field_citizenID">Citizen ID</label>
+          <input type="text" class="form-control" name="citizenID" id="field_citizenID" data-cy="citizenID" formControlName="citizenID" />
+          @if (editForm.get('citizenID')!.invalid && (editForm.get('citizenID')!.dirty || editForm.get('citizenID')!.touched)) {
+            <div>
+              @if (editForm.get('citizenID')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.dob" for="field_dob">Dob</label>
+          <input type="text" class="form-control" name="dob" id="field_dob" data-cy="dob" formControlName="dob" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.contact" for="field_contact">Contact</label>
+          <input type="text" class="form-control" name="contact" id="field_contact" data-cy="contact" formControlName="contact" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.gender" for="field_gender">Gender</label>
+          <input type="text" class="form-control" name="gender" id="field_gender" data-cy="gender" formControlName="gender" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.relation" for="field_relation">Relation</label>
+          <input type="text" class="form-control" name="relation" id="field_relation" data-cy="relation" formControlName="relation" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="qLchungcuApp.citizenTable.familyId" for="field_familyId">Family Id</label>
+          <select
+            class="form-control"
+            id="field_familyId"
+            data-cy="familyId"
+            name="familyId"
+            formControlName="familyId"
+            [compareWith]="compareRoomTable"
+          >
+            <option [ngValue]="null"></option>
+            @for (roomTableOption of familyIdsCollection; track $index) {
+              <option [ngValue]="roomTableOption">{{ roomTableOption.roomId }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

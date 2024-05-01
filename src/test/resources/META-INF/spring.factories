@@ -1,0 +1,2 @@
+org.springframework.test.context.ContextCustomizerFactory = org.qlcc.app.config.\
+    SqlTestContainersSpringContextCustomizerFactory

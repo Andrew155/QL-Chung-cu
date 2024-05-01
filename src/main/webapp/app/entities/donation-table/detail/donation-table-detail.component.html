@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (donationTable) {
+      <div>
+        <h2 data-cy="donationTableDetailsHeading"><span jhiTranslate="qLchungcuApp.donationTable.detail.title">Donation Table</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ donationTable.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.createAt">Create At</span></dt>
+          <dd>
+            <span>{{ donationTable.createAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.updateAt">Update At</span></dt>
+          <dd>
+            <span>{{ donationTable.updateAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.deletedAt">Deleted At</span></dt>
+          <dd>
+            <span>{{ donationTable.deletedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.donationId">Donation Id</span></dt>
+          <dd>
+            <span>{{ donationTable.donationId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.donationType">Donation Type</span></dt>
+          <dd>
+            <span>{{ donationTable.donationType }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.donationDesc">Donation Desc</span></dt>
+          <dd>
+            <span>{{ donationTable.donationDesc }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.donationMonth">Donation Month</span></dt>
+          <dd>
+            <span>{{ donationTable.donationMonth }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.donationCost">Donation Cost</span></dt>
+          <dd>
+            <span>{{ donationTable.donationCost }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.roomId">Room Id</span></dt>
+          <dd>
+            <span>{{ donationTable.roomId }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.status">Status</span></dt>
+          <dd>
+            <span>{{ donationTable.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="qLchungcuApp.donationTable.roomTable">Room Table</span></dt>
+          <dd>
+            @if (donationTable.roomTable) {
+              <div>
+                <a [routerLink]="['/room-table', donationTable.roomTable.id, 'view']">{{ donationTable.roomTable.roomId }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/donation-table', donationTable.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

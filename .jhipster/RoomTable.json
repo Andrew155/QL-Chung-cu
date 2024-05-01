@@ -1,0 +1,79 @@
+{
+  "annotations": {
+    "changelogDate": "20240421044159"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "createAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updateAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "deletedAt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "roomId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "area",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ownTime",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ownerId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ownerName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    }
+  ],
+  "name": "RoomTable",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "feeTable",
+      "otherEntityRelationshipName": "roomTable",
+      "relationshipName": "feeTable",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "vehicleTable",
+      "otherEntityRelationshipName": "roomTable",
+      "relationshipName": "vehicleTable",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "billTable",
+      "otherEntityRelationshipName": "roomTable",
+      "relationshipName": "billTable",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "donationTable",
+      "otherEntityRelationshipName": "roomTable",
+      "relationshipName": "donationTable",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

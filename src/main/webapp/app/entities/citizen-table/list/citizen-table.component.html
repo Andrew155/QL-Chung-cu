@@ -1,0 +1,171 @@
+<div>
+  <h2 id="page-heading" data-cy="CitizenTableHeading">
+    <span jhiTranslate="qLchungcuApp.citizenTable.home.title">Citizen Management</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.citizenTable.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-citizen-table"
+        [routerLink]="['/citizen-table/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span  jhiTranslate="qLchungcuApp.citizenTable.home.createLabel">Create a new Citizen</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (citizenTables?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="qLchungcuApp.citizenTable.home.notFound">No Citizen Tables found</span>
+    </div>
+  }
+
+  @if (citizenTables && citizenTables.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.createAt">Create At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updateAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.updateAt">Update At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="citizenID">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.citizenID">Citizen ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dob">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.dob">Dob</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="contact">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.contact">Contact</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gender">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="relation">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.relation">Relation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.status">Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="familyId.roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.citizenTable.familyId">Family Id</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (citizenTable of citizenTables; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/citizen-table', citizenTable.id, 'view']">{{ citizenTable.id }}</a>
+              </td>
+              <td>{{ citizenTable.createAt | formatMediumDatetime }}</td>
+              <td>{{ citizenTable.updateAt | formatMediumDatetime }}</td>
+              <td>{{ citizenTable.deletedAt | formatMediumDatetime }}</td>
+              <td>{{ citizenTable.citizenID }}</td>
+              <td>{{ citizenTable.name }}</td>
+              <td>{{ citizenTable.dob }}</td>
+              <td>{{ citizenTable.contact }}</td>
+              <td>{{ citizenTable.gender }}</td>
+              <td>{{ citizenTable.relation }}</td>
+              <td>{{ citizenTable.status }}</td>
+              <td>
+                @if (citizenTable.familyId) {
+                  <div>
+                    <a [routerLink]="['/room-table', citizenTable.familyId.id, 'view']">{{ citizenTable.familyId.roomId }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/citizen-table', citizenTable.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="['/citizen-table', citizenTable.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(citizenTable)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

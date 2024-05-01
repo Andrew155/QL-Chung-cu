@@ -1,0 +1,33 @@
+{
+  "qLchungcuApp": {
+    "vehicleTable": {
+      "home": {
+        "title": "Quản Lý Phương Tiện",
+        "refreshListLabel": "Refresh",
+        "createLabel": "Thêm mới một phương tiện",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật phương tiện",
+        "notFound": "Không tìm thấy phương tiện"
+      },
+      "created": "Một phương tiện mới được tạo với mã {{ param }}",
+      "updated": "Một phương tiện cập nhật với mã {{ param }}",
+      "deleted": "Một phương tiện đã xóa với mã {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa phương tiện {{ id }}?"
+      },
+      "detail": {
+        "title": "Quản Lý Phương Tiện"
+      },
+      "id": "ID",
+      "createAt": "Ngày tạo",
+      "updateAt": "Ngày chỉnh sửa",
+      "deletedAt": "Ngày xoá",
+      "vehicleName": "Tên phương tiện ",
+      "vehicleType": "Loại phương tiện",
+      "vehicleId": "Mã phương tiện",
+      "roomId": "Mã phòng",
+      "ownerId": "Mã chủ xe",
+      "vehicleFee": "Phí phương tiện",
+      "roomTable": "Phòng"
+    }
+  }
+}

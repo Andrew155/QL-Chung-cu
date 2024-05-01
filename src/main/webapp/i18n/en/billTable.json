@@ -1,0 +1,37 @@
+{
+  "qLchungcuApp": {
+    "billTable": {
+      "home": {
+        "title": "Bill Tables",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Bill Table",
+        "createOrEditLabel": "Create or edit a Bill Table",
+        "notFound": "No Bill Tables found"
+      },
+      "created": "A new Bill Table is created with identifier {{ param }}",
+      "updated": "A Bill Table is updated with identifier {{ param }}",
+      "deleted": "A Bill Table is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Bill Table {{ id }}?"
+      },
+      "detail": {
+        "title": "Bill Table"
+      },
+      "id": "ID",
+      "createAt": "Create At",
+      "updateAt": "Update At",
+      "deletedAt": "Deleted At",
+      "billType": "Bill Type",
+      "billId": "Bill Id",
+      "billMonth": "Bill Month",
+      "billAmount": "Bill Amount",
+      "roomId": "Room Id",
+      "date": "Date",
+      "status": "Status",
+      "billCost": "Bill Cost",
+      "customerID": "Customer ID",
+      "roomTable": "Room Table",
+      "applicationTable": "Application Table"
+    }
+  }
+}

@@ -1,0 +1,163 @@
+<div>
+  <h2 id="page-heading" data-cy="VehicleTableHeading">
+    <span jhiTranslate="qLchungcuApp.vehicleTable.home.title">Vehicle Tables</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="qLchungcuApp.vehicleTable.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-vehicle-table"
+        [routerLink]="['/vehicle-table/new']"
+      >
+        <fa-icon *jhiHasAnyAuthority="'ROLE_ADMIN'" icon="plus"></fa-icon>
+        <span *jhiHasAnyAuthority="'ROLE_ADMIN'" jhiTranslate="qLchungcuApp.vehicleTable.home.createLabel">Create a new Vehicle Table</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (vehicleTables?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="qLchungcuApp.vehicleTable.home.notFound">No Vehicle Tables found</span>
+    </div>
+  }
+
+  @if (vehicleTables && vehicleTables.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.createAt">Create At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updateAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.updateAt">Update At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="deletedAt">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.deletedAt">Deleted At</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="vehicleName">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.vehicleName">Vehicle Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="vehicleType">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.vehicleType">Vehicle Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="vehicleId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.vehicleId">Vehicle Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+           <!-- <th scope="col" jhiSortBy="roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.roomId">Room Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th> -->
+            <th scope="col" jhiSortBy="ownerId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.ownerId">Owner Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="vehicleFee">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.vehicleFee">Vehicle Fee</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="roomTable.roomId">
+              <div class="d-flex">
+                <span jhiTranslate="qLchungcuApp.vehicleTable.roomTable">Room Table</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (vehicleTable of vehicleTables; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/vehicle-table', vehicleTable.id, 'view']">{{ vehicleTable.id }}</a>
+              </td>
+              <td>{{ vehicleTable.createAt | formatMediumDatetime }}</td>
+              <td>{{ vehicleTable.updateAt | formatMediumDatetime }}</td>
+              <td>{{ vehicleTable.deletedAt | formatMediumDatetime }}</td>
+              <td>{{ vehicleTable.vehicleName }}</td>
+              <td>{{ vehicleTable.vehicleType }}</td>
+              <td>{{ vehicleTable.vehicleId }}</td>
+            <!--  <td>{{ vehicleTable.roomId }}</td> -->
+              <td>{{ vehicleTable.ownerId }}</td>
+              <td>{{ vehicleTable.vehicleFee }}</td>
+              <td>
+                @if (vehicleTable.roomTable) {
+                  <div>
+                    <a [routerLink]="['/room-table', vehicleTable.roomTable.id, 'view']">{{ vehicleTable.roomTable.roomId }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/vehicle-table', vehicleTable.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a *jhiHasAnyAuthority="'ROLE_ADMIN'" [routerLink]="['/vehicle-table', vehicleTable.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(vehicleTable)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
